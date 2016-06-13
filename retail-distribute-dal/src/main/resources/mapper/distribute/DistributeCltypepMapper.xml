@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.wonhigh.retail.distribute.dal.distribute.jp.database.DistributeCltypepMapper" >
+
+	<resultMap id="BaseResultMap" type="cn.wonhigh.retail.distribute.common.model.DistributeCltypep">
+    	<result column="typeno" property="typeno" jdbcType="VARCHAR" />
+   		<result column="classno" property="classno" jdbcType="VARCHAR" />
+   		<result column="colthno" property="colthno" jdbcType="VARCHAR" />
+   		<result column="classname" property="classname" jdbcType="VARCHAR" />
+   		<result column="gxrq" property="gxrq" jdbcType="TIMESTAMP" />
+   		<result column="yhid" property="yhid" jdbcType="VARCHAR" />
+  	</resultMap>
+  	<select id="selectByParams" resultMap="BaseResultMap" parameterType="map">
+  		select typeno,classno,colthno,classname,gxrq,yhid from cltypep where 1=1
+  		<if test="null!=params">
+  			<if test="null != params.colthno">
+  			 and colthno=#{params.colthno}
+  			</if>
+  		</if>
+  	</select>
+  	<insert id="insert" parameterType="cn.wonhigh.retail.distribute.common.model.DistributeCltypep">
+  		insert into cltypep(colthno,color,typeno,classno,classname,gxrq,yhid) values
+  		(#{colthno},'%',#{typeno},#{classno},#{classname},#{gxrq,jdbcType=TIMESTAMP},#{yhid})
+  	</insert>
+  	<update id="updateByPrimaryKey" parameterType="cn.wonhigh.retail.distribute.common.model.DistributeCltypep">
+  		update cltypep set
+  		<if test="null!=classno and ''!=classno">
+  			classno=#{classno},
+  		</if>
+		<if test="null!=classname and ''!=classname">
+  			classname=#{classname},
+  		</if>
+  		gxrq=#{gxrq,jdbcType=TIMESTAMP},
+  		yhid=#{yhid}
+  		where colthno=#{colthno}
+  		and typeno=#{typeno}
+  	</update>
+  	<delete id="deleteByPrimarayKeyForModel" parameterType="cn.wonhigh.retail.distribute.common.model.DistributeCltypep">
+  		delete from cltypep where colthno=#{colthno} 
+  		<if test="null != typeno">
+  			 and typeno=#{typeno}
+  		</if>
+  	</delete>
+</mapper>

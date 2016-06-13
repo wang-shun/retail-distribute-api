@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.wonhigh.retail.distribute.dal.distribute.jp.database.DistributeColothMapper" >
+
+	<resultMap id="BaseResultMap" type="cn.wonhigh.retail.distribute.common.model.DistributeColoth">
+    	<result column="recno" property="recno" jdbcType="INTEGER" />
+    	<result column="colthno" property="colthno" jdbcType="VARCHAR" />
+    	<result column="color_nos" property="colorNos" jdbcType="VARCHAR" />
+   		<result column="colthname" property="colthname" jdbcType="VARCHAR" />
+   		<result column="words" property="words" jdbcType="VARCHAR" />
+   		<result column="msize" property="msize" jdbcType="VARCHAR" />
+   		<result column="mcolor" property="mcolor" jdbcType="VARCHAR" />
+   		<result column="sprice" property="sprice" jdbcType="DECIMAL" />
+   		<result column="price" property="price" jdbcType="DECIMAL" />
+   		<result column="gprice" property="gprice" jdbcType="DECIMAL" />
+   		<result column="gxrq" property="gxrq" jdbcType="TIMESTAMP" />
+   		<result column="yhid" property="yhid" jdbcType="VARCHAR" />
+  	</resultMap>
+  	<sql id="Base_Column_List">
+  		recno,colthno,color_nos,colthname,words,msize,mcolor,sprice,price,gprice,gxrq,yhid
+  	</sql>
+  	<select id="selectByParams" resultMap="BaseResultMap" parameterType="map">
+  		select 
+  			<include refid="Base_Column_List"></include>
+  		from coloth where 1=1
+  		<if test="null!=params">
+  			<if test="null != params.colthno">
+  			 and colthno=#{params.colthno}
+  			</if>
+  		</if>
+  	</select>
+  	<insert id="insert" parameterType="cn.wonhigh.retail.distribute.common.model.DistributeColoth">
+  		insert into coloth(recno,colthno,color_nos,colthname,words,msize,mcolor,sprice,price,gprice,gxrq,yhid) values
+  		(#{recno},#{colthno},#{colorNos},#{colthname},#{words},#{msize},#{mcolor},#{sprice},#{price},#{gprice},#{gxrq,jdbcType=TIMESTAMP},#{yhid})
+  	</insert>
+  	<update id="updateByPrimaryKey" parameterType="cn.wonhigh.retail.distribute.common.model.DistributeColoth">
+  		update coloth set
+  		<if test="null!=recno and ''!=recno">
+  		  	recno=#{recno},
+  		</if>
+		<if test="null!=mcolor and ''!=mcolor">
+		  	mcolor=#{mcolor},
+		  	color_nos=#{colorNos},
+		</if>
+  		gxrq=#{gxrq,jdbcType=TIMESTAMP},
+  		yhid=#{yhid}
+  		where colthno=#{colthno}
+  		and msize=#{msize}
+  	</update>
+  	<delete id="deleteByPrimarayKeyForModel" parameterType="cn.wonhigh.retail.distribute.common.model.DistributeCltypep">
+  		delete from coloth where 1=1 
+  		<if test="colthno != null">
+  			and colthno=#{colthno}
+  			<if test="null != msize">
+  			and msize=#{msize}
+  			</if>
+  		</if>
+  		<if test="colthno == null">
+  		 	and words=#{words}
+  		</if>
+  	</delete>
+</mapper>

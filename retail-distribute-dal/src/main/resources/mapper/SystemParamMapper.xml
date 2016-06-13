@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.wonhigh.retail.distribute.dal.database.SystemParamMapper" >
+
+	<resultMap id="BaseResultMap" type="cn.wonhigh.retail.distribute.common.model.SystemParam">
+    	<result column="id" property="id" jdbcType="VARCHAR"/>
+   		<result column="param_type" property="paramType" jdbcType="VARCHAR"/>
+   		<result column="param_id" property="paramId" jdbcType="VARCHAR"/>
+   		<result column="param_name" property="paramName" jdbcType="VARCHAR"/>
+   		<result column="param_value" property="paramValue" jdbcType="VARCHAR"/>
+   		<result column="remark" property="remark" jdbcType="VARCHAR"/>
+  	</resultMap>
+
+  	<select id="selectByParams" resultMap="BaseResultMap" parameterType="map">
+  		select id,param_type,param_id,param_name,param_value,remark from system_param where 1=1
+  		<if test="null!=params">
+  			<if test="null != params.paramType">
+  			 and param_type=#{params.paramType}
+  			</if>
+  			<if test="null != params.paramId">
+  			 and param_id=#{params.paramId}
+  			</if>
+  		</if>
+  	</select>
+  	
+  	<insert id="insert" parameterType="cn.wonhigh.retail.distribute.common.model.SystemParam">
+  		insert into system_param(id,parma_type,param_id,param_name,param_value,remark)
+  		values(#{id},#{paramType},#{paramId},#{paramName},#{paramValue},#{remark})
+  	</insert>
+  	<update id="updateByPrimaryKey" parameterType="cn.wonhigh.retail.distribute.common.model.SystemParam">
+  		update system_param
+  		set param_value=#{paramValue}
+  		where id=#{id}
+  	</update>
+</mapper>

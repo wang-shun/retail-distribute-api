@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.wonhigh.retail.distribute.dal.distribute.jp.database.DistributeColothTMapper" >
+
+	<resultMap id="BaseResultMap" type="cn.wonhigh.retail.distribute.common.model.DistributeColothT">
+    	<result column="colthno" property="colthno" jdbcType="VARCHAR" />
+   		<result column="colthname" property="colthname" jdbcType="VARCHAR" />
+   		<result column="colthname3" property="colthname3" jdbcType="VARCHAR" />
+   		<result column="colthname2" property="colthname2" jdbcType="VARCHAR" />
+   		<result column="location" property="location" jdbcType="VARCHAR" />
+   		<result column="styleno" property="styleno" jdbcType="VARCHAR" />
+   		<result column="originhh" property="originhh" jdbcType="VARCHAR" />
+   		<result column="sizekind2" property="sizekind2" jdbcType="VARCHAR" />
+   		<result column="cusno" property="cusno" jdbcType="VARCHAR" />
+   		<result column="colthnob" property="colthnob" jdbcType="VARCHAR" />
+   		<result column="mainqdb" property="mainqdb" jdbcType="VARCHAR" />
+   		<result column="valids" property="valids" jdbcType="VARCHAR" />
+   		<result column="sizekind" property="sizekind" jdbcType="VARCHAR" />
+   		<result column="sprice" property="mainqdb" jdbcType="DECIMAL" />
+   		<result column="price" property="valids" jdbcType="DECIMAL" />
+   		<result column="gprice" property="sizekind" jdbcType="DECIMAL" />
+   		<result column="gxrq" property="gxrq" jdbcType="TIMESTAMP" />
+   		<result column="yhid" property="yhid" jdbcType="VARCHAR" />
+  	</resultMap>
+  	<sql id="Base_Column_List">
+  		colthno,colthname,colthname3,colthname2,location,styleno,originhh,sizekind2,cusno,
+  		colthnob,mainqdb,valids,sizekind,sprice,price,gprice,gxrq,yhid
+  	</sql>
+  	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+  		select 
+  		<include refid="Base_Column_List"></include>  
+  		from coloth_t where 1=1 and colthno=#{colthno}
+  	</select>
+  	<select id="selectByParams" resultMap="BaseResultMap" parameterType="map">
+  		select 
+  			<include refid="Base_Column_List"></include>
+  		from coloth_t where 1=1
+  		<if test="null!=params">
+  			<if test="null != params.colthno">
+  			 and colthno=#{params.colthno}
+  			</if>
+  		</if>
+  	</select>
+  	<insert id="insert" parameterType="cn.wonhigh.retail.distribute.common.model.DistributeColothT">
+  		insert into coloth_t(colthno,colthname,colthname3,colthname2,location,styleno,originhh,sizekind2,cusno,
+  		colthnob,mainqdb,valids,sizekind,sprice,price,gprice,gxrq,yhid) values
+  		(#{colthno},#{colthname},#{colthname3},#{colthname2},#{location},#{styleno},#{originhh},#{sizekind2},
+  		#{cusno},#{colthnob},#{mainqdb},#{valids},#{sizekind},#{sprice},#{price},#{gprice},#{gxrq,jdbcType=TIMESTAMP},#{yhid})
+  	</insert>
+  	<update id="updateByPrimaryKey" parameterType="cn.wonhigh.retail.distribute.common.model.DistributeColothT">
+  		update coloth_t set
+  		<if test="null!=colthname and ''!=colthname">
+  			colthname=#{colthname},
+  		</if>
+  		<if test="null!=colthname3 and ''!=colthname3">
+  			colthname3=#{colthname3},
+  		</if>
+  		<if test="null!=colthname2 and ''!=colthname2">
+  			colthname2=#{colthname2},
+  		</if>
+  		<if test="null!=location and ''!=location">
+  			location=#{location},
+  		</if>
+  		<if test="null!=styleno and ''!=styleno">
+  			styleno=#{styleno},
+  		</if>
+  		<if test="null!=originhh and ''!=originhh">
+  			originhh=#{originhh},
+  		</if>
+  		<if test="null!=sizekind2 and ''!=sizekind2">
+  			sizekind2=#{sizekind2},
+  		</if>
+  		<if test="null!=cusno and ''!=cusno">
+  			cusno=#{cusno},
+  		</if>
+  		<if test="null!=colthnob and ''!=colthnob">
+  			colthnob=#{colthnob},
+  		</if>
+  		<if test="null!=mainqdb and ''!=mainqdb">
+  			mainqdb=#{mainqdb},
+  		</if>
+  		<if test="null!=valids and ''!=valids">
+  			valids=#{valids},
+  		</if>
+  		<if test="null!=sizekind and ''!=sizekind">
+  			sizekind=#{sizekind},
+  		</if>
+  		gxrq=#{gxrq,jdbcType=TIMESTAMP},
+  		yhid=#{yhid}
+  		where colthno=#{colthno}
+  	</update>
+  	<delete id="deleteByPrimarayKeyForModel" parameterType="cn.wonhigh.retail.distribute.common.model.DistributeColothT">
+  		delete from coloth_t where colthno=#{colthno}
+  	</delete>
+</mapper>

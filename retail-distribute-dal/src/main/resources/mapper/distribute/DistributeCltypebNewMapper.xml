@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.wonhigh.retail.distribute.dal.distribute.jp.database.DistributeCltypebNewMapper" >
+
+	<resultMap id="BaseResultMap" type="cn.wonhigh.retail.distribute.common.model.DistributeCltypebNew">
+    	<result column="typeno" property="typeno" jdbcType="VARCHAR" />
+   		<result column="typename" property="typename" jdbcType="VARCHAR" />
+   		<result column="classno" property="classno" jdbcType="VARCHAR" />
+   		<result column="classname" property="classname" jdbcType="VARCHAR" />
+  	</resultMap>
+
+  	<select id="selectByParams" resultMap="BaseResultMap" parameterType="map">
+  		select typeno,typename,classno,classname from cltypeb_new where 1=1
+  		<if test="null!=params">
+  			<if test="null != params.typeno">
+  			 and typeno=#{params.typeno}
+  			</if>
+  			<if test="null != params.typename">
+  			 and typename=#{params.typename}
+  			</if>
+  			<if test="null != params.classno">
+  			 and classno=#{params.classno}
+  			</if>
+  			<if test="null != params.classname">
+  			 and classname=#{params.classname}
+  			</if>
+  		</if>
+  	</select>
+</mapper>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+            http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+	<!-- 加载本工程配置 -->
+<!-- 	<import resource="classpath:META-INF/spring-api-other-conf.xml" /> -->
+	<!-- 扫描本工程bean-->
+	<context:component-scan base-package="cn.wonhigh.retail.distribute.service"/>
+	
+	<bean id="springContext" class="cn.wonhigh.retail.backend.core.SpringContext"></bean>
+	
+	<!-- 加载base工程配置
+	<import resource="classpath:META-INF/spring-base-service.xml"/>
+	 -->
+	<context:component-scan base-package="com.yougou.logistics.base.service">
+		<context:include-filter type="regex" expression="com.yougou.logistics.base.service.aop.*"/>
+		<context:include-filter type="regex" expression="com.yougou.logistics.base.service.utils.*"/>
+        <context:exclude-filter type="regex" expression="com.yougou.logistics.base.service.CodingRuleServiceImpl"/>
+	</context:component-scan>
+	<!-- 加载依赖dal层配置 -->
+	<import resource="classpath:META-INF/spring-distribute-dal.xml" />
+	<import resource="classpath:META-INF/spring-distribute-dal-multids.xml" />
+</beans>

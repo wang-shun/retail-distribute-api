@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.wonhigh.retail.distribute.dal.database.DataSyncLogMapper" >
+
+	<resultMap id="BaseResultMap" type="cn.wonhigh.retail.distribute.common.model.DataSyncLog">
+    	<result column="id" property="id" jdbcType="VARCHAR" />
+   		<result column="sync_time" property="syncTime" jdbcType="VARCHAR" />
+   		<result column="sync_result" property="syncResult" jdbcType="VARCHAR" />
+   		<result column="sync_param1" property="syncParam1" jdbcType="VARCHAR" />
+   		<result column="sync_param2" property="syncParam2" jdbcType="VARCHAR" />
+   		<result column="sync_param3" property="syncParam3" jdbcType="VARCHAR" />
+   		<result column="sync_param4" property="syncParam4" jdbcType="VARCHAR" />
+   		<result column="sync_param5" property="syncParam5" jdbcType="VARCHAR" />
+   		<result column="sync_message" property="syncMessage" jdbcType="VARCHAR" />
+  	</resultMap>
+  	
+  	<select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.String">
+  		select id,sync_time,sync_result,sync_param1,sync_param2,sync_param3,sync_param4,sync_param5,sync_message
+  		from data_sync_log where id=#{id}
+  	</select>
+  	
+  	<insert id="insert" parameterType="cn.wonhigh.retail.distribute.common.model.DataSyncLog">
+  		insert into data_sync_log(id,sync_time,create_time,sync_result,sync_param1,sync_param2,sync_param3,sync_param4,sync_param5,sync_message)
+  		values(#{id},#{syncTime},now(),#{syncResult},#{syncParam1},#{syncParam2},#{syncParam3},#{syncParam4},#{syncParam5},#{syncMessage})
+  	</insert>
+  	
+  	<update id="update" parameterType="cn.wonhigh.retail.distribute.common.model.DataSyncLog">
+  		update data_sync_log 
+  		set sync_result=#{syncResult},
+  		update_time=now()
+  		<if test="null != syncParam1">
+  			,sync_param1=#{syncParam1}
+  		</if>
+  		<if test="null != syncParam2">
+  			,sync_param2=#{syncParam2}
+  		</if>
+  		<if test="null != syncParam3">
+  			,sync_param3=#{syncParam3}
+  		</if>
+  		<if test="null != syncParam5">
+  			,sync_param5=#{syncParam5}
+  		</if>
+  		<if test="null != syncMessage">
+  			,sync_message=#{syncMessage}
+  		</if>
+  		where id=#{id}
+  	</update>
+
+</mapper>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jee="http://www.springframework.org/schema/jee" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd  
+	                      http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+	                      http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd         
+	                      http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.1.xsd         
+	                      http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd">
+
+	<!-- 加载spring配置 -->
+	<import resource="classpath:META-INF/spring-distribute-dal.xml" />
+	<!-- 事务管理器 -->
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	
+	
+	<bean id="sqlSessionFactoryForTest" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="configLocation" value="classpath:META-INF/mybatis-distribute-dal-config.xml" />
+		<property name="dataSource" ref="dynamicDataSource" />
+	</bean>
+	
+	<!-- 配置数据源 用于执行jdbc -->
+	 <bean id="dynamicDataSource" class="com.jolbox.bonecp.BoneCPDataSource" destroy-method="close">
+		<property name="driverClass"><value>${bssybase.db.driverClass}</value></property>
+		<property name="jdbcUrl"><value>jdbc:jtds:sybase://172.17.17.178:51000/zbbasto;charset=gbk</value></property>
+		<property name="user" ><value>sale2</value></property>
+		<property name="password"><value>XBL_xyZB@015</value></property>
+		 <property name="idleConnectionTestPeriodInMinutes" value="240"/>  
+		 <property name="idleMaxAgeInMinutes" value="60"/>  
+		 <property name="maxConnectionsPerPartition" value="10"/>  
+		  <property name="minConnectionsPerPartition" value="2"/>  
+		  <property name="partitionCount" value="1"/>  
+		  <property name="acquireIncrement" value="1"/>  
+		  <property name="statementsCacheSize" value="0"/>  
+		  <property name="releaseHelperThreads" value="5"/>  
+		  <property name="connectionTimeoutInMs" value="5000"/> 
+	</bean>
+	<bean id="sqlSessionTemplateTest" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg index="0" ref="sqlSessionFactoryForTest" />
+	</bean>
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+       <property name="basePackage" value="cn.wonhigh.retail.distribute.dal.distribute.jp.database"/>
+       <property name="sqlSessionTemplateBeanName" value="sqlSessionTemplateTest"></property>
+    </bean>
+	
+</beans>

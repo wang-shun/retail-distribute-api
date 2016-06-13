@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.wonhigh.retail.distribute.dal.distribute.jp.database.DistributeCltypeNewMapper" >
+
+	<resultMap id="BaseResultMap" type="cn.wonhigh.retail.distribute.common.model.DistributeCltypeNew">
+    	<result column="typeno" property="typeno" jdbcType="VARCHAR" />
+   		<result column="typename" property="typename" jdbcType="VARCHAR" />
+  	</resultMap>
+   
+  	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+  		select typeno,typename from cltype_new where 1=1 and typeno=#{typeno}
+  	</select>
+  	
+  	<select id="selectByParams" resultMap="BaseResultMap" parameterType="map">
+  		select typeno,typename from cltype_new where 1=1
+  		<if test="null!=params">
+  			<if test="null != params.typeno">
+  			 and typeno=#{params.typeno}
+  			</if>
+  			<if test="null != params.typename">
+  			 and typename=#{params.typename}
+  			</if>
+  		</if>
+  	</select>
+</mapper>

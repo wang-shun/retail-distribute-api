@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.wonhigh.retail.distribute.dal.distribute.jp.database.DistributeColothTBMapper" >
+
+	<resultMap id="BaseResultMap" type="cn.wonhigh.retail.distribute.common.model.DistributeColothTB">
+    	<result column="colthno" property="colthno" jdbcType="VARCHAR" />
+   		<result column="shoestyle" property="shoestyle" jdbcType="VARCHAR" />
+   		<result column="colthname4" property="colthname4" jdbcType="VARCHAR" />
+   		<result column="bz1" property="bz1" jdbcType="VARCHAR" />
+   		<result column="bz2" property="bz2" jdbcType="VARCHAR" />
+   		<result column="bz3" property="bz3" jdbcType="VARCHAR" />
+   		<result column="gxrq" property="gxrq" jdbcType="TIMESTAMP" />
+   		<result column="yhid" property="yhid" jdbcType="VARCHAR" />
+  	</resultMap>
+  	<sql id="Base_Column_List">
+  		colthno,shoestyle,colthname4,bz1,bz2,bz3,gxrq,yhid
+  	</sql>
+  	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+  		select 
+  		<include refid="Base_Column_List"></include>  
+  		from coloth_t_b where 1=1 and colthno=#{colthno}
+  	</select>
+  	<select id="selectByParams" resultMap="BaseResultMap" parameterType="map">
+  		select 
+  			<include refid="Base_Column_List"></include>
+  		from coloth_t_b where 1=1
+  		<if test="null!=params">
+  			<if test="null != params.colthno">
+  			 and colthno=#{params.colthno}
+  			</if>
+  		</if>
+  	</select>
+  	<insert id="insert" parameterType="cn.wonhigh.retail.distribute.common.model.DistributeColothTB">
+  		insert into coloth_t_b(colthno,shoestyle,colthname4,bz1,bz2,bz3,gxrq,yhid) values
+  		(#{colthno},#{shoestyle},#{colthname4},#{bz1},#{bz2},#{bz3},#{gxrq,jdbcType=TIMESTAMP},#{yhid})
+  	</insert>
+  	<update id="updateByPrimaryKey" parameterType="cn.wonhigh.retail.distribute.common.model.DistributeColothTB">
+  		update coloth_t_b set 
+  		<if test="null!=shoestyle and ''!=shoestyle">
+  			shoestyle=#{shoestyle},
+  		</if>
+		<if test="null!=colthname4 and ''!=colthname4">
+  			colthname4=#{colthname4},
+  		</if>
+		<if test="null!=bz1 and ''!=bz1">
+  			bz1=#{bz1},
+  		</if>
+  		<if test="null!=bz2 and ''!=bz2">
+  			bz2=#{bz2},
+  		</if>
+  		<if test="null!=bz3 and ''!=bz3">
+  			bz3=#{bz3},
+  		</if>
+  		gxrq=#{gxrq,jdbcType=TIMESTAMP},
+  		yhid=#{yhid}
+  		where colthno=#{colthno}
+  	</update>
+  	<delete id="deleteByPrimarayKeyForModel" parameterType="cn.wonhigh.retail.distribute.common.model.DistributeColothTB">
+  		delete from coloth_t_b where colthno=#{colthno}
+  	</delete>
+</mapper>

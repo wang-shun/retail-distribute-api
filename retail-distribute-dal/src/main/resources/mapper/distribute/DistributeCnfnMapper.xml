@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.wonhigh.retail.distribute.dal.distribute.jp.database.DistributeCnfnMapper" >
+
+	<resultMap id="BaseResultMap" type="cn.wonhigh.retail.distribute.common.model.DistributeCnfn">
+    	<result column="cusno" property="cusno" jdbcType="VARCHAR" />
+   		<result column="names" property="names" jdbcType="VARCHAR" />
+  	</resultMap>
+  	<sql id="Base_Column_List">
+  		cusno,names
+  	</sql>
+  	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+  		select 
+  		<include refid="Base_Column_List"></include>  
+  		from cnfn where 1=1 and cusno=#{cusno}
+  	</select>
+   	<insert id="insert" parameterType="cn.wonhigh.retail.distribute.common.model.DistributeCnfn">
+  		insert into cnfn(cusno,names) values
+  		(#{cusno},#{names})
+  	</insert>
+  	<update id="updateByPrimaryKey" parameterType="cn.wonhigh.retail.distribute.common.model.DistributeCnfn">
+  		update cnfn set
+  		<if test="null!=names and ''!=names">
+  			names=#{names},
+  		</if>
+  		where cusno=#{cusno}
+  	</update>
+</mapper>
